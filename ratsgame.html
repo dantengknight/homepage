@@ -6,12 +6,13 @@
 
         <style type="text/css">
 
-            #shape {
+            img {
 
                 width:200px;
                 height:200px;
-                display:none; 
+                display:none;
                 position:relative;
+
 
             }
 
@@ -23,64 +24,125 @@
 
     <body>
 
-        <h1>Test your reaction!</h1>
-
-        <p>Hit Hamtaro as quickly as you can!</p>
-
-        <div> Your time is: <span id="result"></span></div>
-
-        <div> 
-            
-            <img id="shape" src="images/hamtaro.gif">
+        <h1>Rats Game</h1>
+    
         
-        </div>
+        <p>Your score: <span id="score"></span></p>
+
+        <p>Count down: <span id="countdown"></span></p>
+
+        <p id="result"></p>
+
+        <img id="ham0" onclick="hit(0)" src="images/hamtaro0.gif">
+        <img id="ham1" onclick="hit(1)" src="images/hamtaro1.png">
+        <img id="ham2" onclick="hit(2)" src="images/hamtaro2.jpg">
+        <img id="ham3" onclick="hit(3)" src="images/hamtaro3.jpg">
+        <img id="ham4" onclick="hit(4)" src="images/hamtaro4.png">
+        
 
 
         <script type="text/javascript">
 
-            // start timer
-            var start = new Date().getTime();
+            // set variables
+            var score = 0;
+                cd = 20;
 
-            function reappear() {
 
-                // put in random postion
-                var top = Math.random() * 400;
-                var left = Math.random() * 400;
-                document.getElementById("shape").style.top = top + "px";
-                document.getElementById("shape").style.left = left + "px";
-                // reappeal 
-                document.getElementById("shape").style.display = "block";
-                // restart timer
-                start = new Date().getTime();
+            // start game
+            startGame();
 
-            }
+            countdown();
 
-            function appearAfterDelay() {
+            function startGame() {
 
-                setTimeout(reappear, Math.random() * 2000);
+                // init time interval function
+                interval0 = setInterval("showRat()", 2500);
+                interval1 = setInterval("showRat()", 2001);
+
 
             }
 
-            appearAfterDelay();     
+            function countdown() {
 
-            document.getElementById("shape").onclick = function() {
+
+                if ( cd == 0) {
+                    gameOver();
+                }
+                else {
+                    cd -= 1;
+                    document.getElementById("countdown").innerHTML = cd;
+                    timeout1 = setTimeout(countdown, 1000);
+                }
             
-                // set up Timer
-
-                document.getElementById("shape").style.display = "none";
-    
-                var end = new Date().getTime();
-                var diff = (end - start)/1000;
-
-                document.getElementById("result").innerHTML = diff + "s";
+            }
 
 
-                // reinvoke the picture
-                appearAfterDelay();
+
+            function showRat() {
+
+                // pick a random rat
+                var ratId = Math.floor(Math.random() * 4);
+                ratId = "ham" + ratId;
+                // show that rat, set width, height, display
+                var top = Math.random() * 150;
+                var left = Math.random() * 1200;
+                document.getElementById(ratId).style.top = top + "px";
+                document.getElementById(ratId).style.left = left + "px";
+                document.getElementById(ratId).style.display = "block";
+
+                // disappear in a random time range
+                var disappearTime = Math.random() * 1000 + 1500;
+                timeout = setTimeout(disappear(ratId), disappearTime);
 
             }
 
 
+            function disappear(ratId) {
+
+                return function() {
+                    document.getElementById(ratId).style.display = "none";
+                }
+
+            }
+
+            function hit(ratId) {
+
+                ratId = "ham" + ratId;
+                console.log(ratId);
+                score += 1;
+                document.getElementById("score").innerHTML = score;
+                document.getElementById(ratId).style.display = "none";
+
+                // make a surprise face
+                document.getElementById("ham4").style.display = "block";
+                document.getElementById("ham4").style.top =
+                    document.getElementById(ratId).style.top;
+                document.getElementById("ham4").style.left =
+                    document.getElementById(ratId).style.left;
+                setTimeout(disappear("ham4"), 1500);// surprise face
+           
+            }
+
+            function gameOver() {
+
+                clearInterval(interval0);
+                clearInterval(interval1);
+                clearTimeout(timeout);
+                clearTimeout(timeout1);
+                clearRats();
+                document.getElementById("result").innerHTML = "Your final score is " +
+                    score + " !";
+
+
+            }
+
+            function clearRats() {
+
+                for (var i=0; i < 5; i++) {
+                    document.getElementById("ham"+i).style.display = "none";
+                }
+
+            }
             
 
         </script>
