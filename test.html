@@ -1,0 +1,76 @@
+
+<html>
+
+    <head>
+
+        <title> Javascript </title>
+
+        <style type="text/css">
+
+            img {
+
+                width:200px;
+                height:200px;
+
+
+            }
+
+            #ham0 {
+
+                position:relative;
+                top:200px;
+                left:200px;
+
+
+            }
+
+
+        </style>
+
+    </head>
+
+
+    <body>
+
+        <h1>Rats Game</h1>
+    
+        
+        <p>Your score: <span id="score"></span></p>
+
+        <p>Count down: <span id="countdown"></span></p>
+
+        <p id="result"></p>
+
+        <div id="ham0" onclick="hit(0)">
+        </div>
+        <div id="ham1" onclick="hit(1)">
+        </div>
+        <div id="ham2" onclick="hit(2)">
+        </div>
+        <div id="ham3" onclick="hit(3)">
+        </div>
+        <div id="ham4" onclick="hit(4)">
+        </div>
+
+
+        <script type="text/javascript">
+       
+            var id = 0;
+            var ratAddr = "images/hamtaro"+id+".gif"
+
+            var hhh = "012"; 
+            var eee = hhh.charAt(hhh.length-1);
+            var list = [1,2,3];
+            
+            for (var i = 0; i < 10; i++) {
+
+                ratNum = Math.floor(Math.random() * 4);
+                alert(ratNum);
+            }
+
+        </script>
+
+    </body>
+
+
+</html>

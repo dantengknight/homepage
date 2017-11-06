@@ -3,18 +3,45 @@
     <head>
 
         <title> Javascript </title>
+		
+        <link href="https://fonts.googleapis.com/css?family=Architects+Daughter" rel="stylesheet">
 
         <style type="text/css">
 
+            body {
+
+                margin:0;
+                border:0;
+
+            }
+            
             img {
 
                 width:200px;
                 height:200px;
-                display:none;
-                position:relative;
-
+                opacity:0.8;
 
             }
+
+            .rats {
+
+                position:fixed;
+
+            }
+
+            #result {
+
+				background-color:#4285F4;
+				width:350px;
+				opacity:0.8;
+				border-radius: 10px;
+				position:fixed;
+                margin:200px 500px;
+				font-family: 'Architects Daughter', cursive, KaiTi;
+                font-size: 200%;
+
+            }
+
 
 
         </style>
@@ -33,19 +60,32 @@
 
         <p id="result"></p>
 
-        <img id="ham0" onclick="hit(0)" src="images/hamtaro0.gif">
-        <img id="ham1" onclick="hit(1)" src="images/hamtaro1.png">
-        <img id="ham2" onclick="hit(2)" src="images/hamtaro2.jpg">
-        <img id="ham3" onclick="hit(3)" src="images/hamtaro3.jpg">
-        <img id="ham4" onclick="hit(4)" src="images/hamtaro4.png">
-        
+        <div class="rats" id="ham0" onclick="hit(0)">
+        </div>
+
+        <div class="rats" id="ham1" onclick="hit(1)">
+        </div>
+
+        <div class="rats" id="ham2" onclick="hit(2)">
+        </div>
+
+        <div class="rats" id="ham3" onclick="hit(3)">
+        </div>
+
+
 
 
         <script type="text/javascript">
 
             // set variables
             var score = 0;
-                cd = 20;
+                cd = 25;
+                ratAddr = ["images/hamtaro0.gif",
+                            "images/hamtaro1.png",
+                            "images/hamtaro2.jpg",
+                            "images/hamtaro3.jpg",
+                            "images/hamtaro4.png"]
+                ratStatus = [false,false,false,false];
 
 
             // start game
@@ -57,7 +97,7 @@
 
                 // init time interval function
                 interval0 = setInterval("showRat()", 2500);
-                interval1 = setInterval("showRat()", 2001);
+                interval1 = setInterval("showRat()", 2100);
 
 
             }
@@ -80,18 +120,28 @@
 
             function showRat() {
 
-                // pick a random rat
-                var ratId = Math.floor(Math.random() * 4);
-                ratId = "ham" + ratId;
-                // show that rat, set width, height, display
-                var top = Math.random() * 150;
-                var left = Math.random() * 1200;
+                // pick a random rat and check rat status
+                var ratNum; 
+                do {
+                    ratNum = Math.floor(Math.random() * 4);
+                }
+                while (ratStatus[ratNum] == true)
+                var ratId = "ham" + ratNum;
+
+                // update ratStatus
+                ratStatus[ratNum] = true;
+
+                // put img into the div
+                document.getElementById(ratId).innerHTML =
+                    "<img src=" + ratAddr[ratNum] +">";
+                // show that rat, set width, height
+                var top = Math.random() * 550;
+                var left = Math.random() * 1300;
                 document.getElementById(ratId).style.top = top + "px";
                 document.getElementById(ratId).style.left = left + "px";
-                document.getElementById(ratId).style.display = "block";
 
                 // disappear in a random time range
-                var disappearTime = Math.random() * 1000 + 1500;
+                var disappearTime = Math.random() * 1000 + 1200;
                 timeout = setTimeout(disappear(ratId), disappearTime);
 
             }
@@ -100,26 +150,31 @@
             function disappear(ratId) {
 
                 return function() {
-                    document.getElementById(ratId).style.display = "none";
+                    document.getElementById(ratId).innerHTML="";
+                    // update ratStatus
+                    var ratNum = ratId.charAt(ratId.length-1);
+                    if (ratNum < 4) {
+                        ratStatus[ratNum] = false;
+                    }
                 }
 
             }
 
-            function hit(ratId) {
+            function hit(ratNum) {
 
-                ratId = "ham" + ratId;
-                console.log(ratId);
+                // disappear the rat, and update status
+                var ratId = "ham" + ratNum;
                 score += 1;
                 document.getElementById("score").innerHTML = score;
-                document.getElementById(ratId).style.display = "none";
+                document.getElementById(ratId).innerHTML="";
 
                 // make a surprise face
-                document.getElementById("ham4").style.display = "block";
-                document.getElementById("ham4").style.top =
-                    document.getElementById(ratId).style.top;
-                document.getElementById("ham4").style.left =
-                    document.getElementById(ratId).style.left;
-                setTimeout(disappear("ham4"), 1500);// surprise face
+                document.getElementById(ratId).innerHTML=
+                    "<img src=" + ratAddr[4] +">";
+                //document.getElementById("ham4").style.top =
+                 //   document.getElementById(ratId).style.top;
+                //document.getElementById("ham4").style.left =
+                 //   document.getElementById(ratId).style.left;
            
             }
 
@@ -138,8 +193,8 @@
 
             function clearRats() {
 
-                for (var i=0; i < 5; i++) {
-                    document.getElementById("ham"+i).style.display = "none";
+                for (var i=0; i < 4; i++) {
+                    document.getElementById("ham"+i).innerHTML="";
                 }
 
             }
