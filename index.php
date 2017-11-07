@@ -4,7 +4,7 @@
 	<head>
 		
 		
-		<title>while eating</title>
+		<title>danteng knight's space(Binyi Han)</title>
 		
 		<link href="https://fonts.googleapis.com/css?family=Architects+Daughter" rel="stylesheet">
 		
@@ -64,7 +64,7 @@
 
 				background-color:#F7DC9E;
 				float:left;
-				width:150px;
+				width:350px;
 				position:relative;
 				opacity:0.8;
 				border-radius: 10px;
@@ -89,7 +89,7 @@
 	
 		<div class="videolinks">
 		
-			<h1>video</h1>
+			<h1>Meal Time Video</h1>
 			
 				<ul>
 					
@@ -128,7 +128,9 @@
 			
 		</div>
 		
-		<div class="nicecar">
+        <div class="nicecar">
+
+            <h1>Nice Car</h1>
 		
 			<iframe width="560" height="315" src="https://www.youtube.com/embed/0QjF6A3Zwkk" frameborder="0" allowfullscreen></iframe><br>
 		
@@ -136,7 +138,7 @@
 
         <div class="small-games">
 
-            <h1>Games</h1>
+            <h1>Learn By Practice</h1>
 
                 <a href="ratsgame.html">Rats Game</a>
 

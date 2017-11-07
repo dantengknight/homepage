@@ -2,7 +2,7 @@
 
     <head>
 
-        <title> Javascript </title>
+        <title>Rats Game</title>
 		
         <link href="https://fonts.googleapis.com/css?family=Architects+Daughter" rel="stylesheet">
 
@@ -12,6 +12,8 @@
 
                 margin:0;
                 border:0;
+				font-family: 'Architects Daughter', cursive, KaiTi;
+                font-size:140%;
 
             }
             
@@ -32,13 +34,20 @@
             #result {
 
 				background-color:#4285F4;
-				width:350px;
+				width:500px;
 				opacity:0.8;
 				border-radius: 10px;
 				position:fixed;
-                margin:200px 500px;
+                margin:20px 450px;
 				font-family: 'Architects Daughter', cursive, KaiTi;
                 font-size: 200%;
+
+            }
+
+            #scoreline {
+
+                font-size: 150%;
+                font-weight:bold;
 
             }
 
@@ -53,8 +62,10 @@
 
         <h1>Rats Game</h1>
     
-        
-        <p>Your score: <span id="score"></span></p>
+        <p>Catch rats as quickly as you can!</p> 
+        <p>Be careful of evil rats..</p>
+
+        <p id="scoreline">Your score: <span id="score"></span></p>
 
         <p>Count down: <span id="countdown"></span></p>
 
@@ -72,6 +83,8 @@
         <div class="rats" id="ham3" onclick="hit(3)">
         </div>
 
+        <div class="rats" id="ham4" onclick="hit(4)">
+        </div>
 
 
 
@@ -79,13 +92,15 @@
 
             // set variables
             var score = 0;
-                cd = 25;
+                cd = 35;
+                evilRatAddr = "images/evilHamtaro.jpg"
                 ratAddr = ["images/hamtaro0.gif",
                             "images/hamtaro1.png",
                             "images/hamtaro2.jpg",
                             "images/hamtaro3.jpg",
-                            "images/hamtaro4.png"]
-                ratStatus = [false,false,false,false];
+                            evilRatAddr];
+                surpriseRatAddr = "images/surprise.png";
+                ratStatus = [false,false,false,false,false];
 
 
             // start game
@@ -96,7 +111,7 @@
             function startGame() {
 
                 // init time interval function
-                interval0 = setInterval("showRat()", 2500);
+                interval0 = setInterval("showRat()", 2600);
                 interval1 = setInterval("showRat()", 2100);
 
 
@@ -123,7 +138,7 @@
                 // pick a random rat and check rat status
                 var ratNum; 
                 do {
-                    ratNum = Math.floor(Math.random() * 4);
+                    ratNum = Math.floor(Math.random() * 5);
                 }
                 while (ratStatus[ratNum] == true)
                 var ratId = "ham" + ratNum;
@@ -136,7 +151,7 @@
                     "<img src=" + ratAddr[ratNum] +">";
                 // show that rat, set width, height
                 var top = Math.random() * 550;
-                var left = Math.random() * 1300;
+                var left = Math.random() * 1250;
                 document.getElementById(ratId).style.top = top + "px";
                 document.getElementById(ratId).style.left = left + "px";
 
@@ -153,9 +168,7 @@
                     document.getElementById(ratId).innerHTML="";
                     // update ratStatus
                     var ratNum = ratId.charAt(ratId.length-1);
-                    if (ratNum < 4) {
-                        ratStatus[ratNum] = false;
-                    }
+                    ratStatus[ratNum] = false;
                 }
 
             }
@@ -164,17 +177,23 @@
 
                 // disappear the rat, and update status
                 var ratId = "ham" + ratNum;
-                score += 1;
+                var addrOfRat = document.querySelectorAll("#"+ratId+" img")[0].src;
+                // do nothing if hit the surprise rat
+                if (addrOfRat.indexOf(surpriseRatAddr) != -1) return;
+                // lose score if hit evil rat
+                if (addrOfRat.indexOf(evilRatAddr) != -1) {
+                    score -= 3;
+                }
+                // score other rats
+                else {
+                    score += 1;
+                }
                 document.getElementById("score").innerHTML = score;
                 document.getElementById(ratId).innerHTML="";
 
                 // make a surprise face
                 document.getElementById(ratId).innerHTML=
-                    "<img src=" + ratAddr[4] +">";
-                //document.getElementById("ham4").style.top =
-                 //   document.getElementById(ratId).style.top;
-                //document.getElementById("ham4").style.left =
-                 //   document.getElementById(ratId).style.left;
+                    "<img src=" + surpriseRatAddr +">";
            
             }
 
@@ -193,7 +212,7 @@
 
             function clearRats() {
 
-                for (var i=0; i < 4; i++) {
+                for (var i=0; i < 5; i++) {
                     document.getElementById("ham"+i).innerHTML="";
                 }
 
