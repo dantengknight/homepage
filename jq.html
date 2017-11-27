@@ -15,15 +15,18 @@
     <body>
 
 
+        <p></p>
 
 
         <script type="text/javascript">
 
-            $.ajax("info0.txt").done(function(data) {
+            $.ajax("info0.txt")
+                .done(function(data) {
 
-                alert(data);
+                $("p").html(data);
 
-            }).fail(function() {
+            })
+                .fail(function() {
 
                 alert(" failed")
 
