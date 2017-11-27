@@ -3,29 +3,11 @@
 
     <head>
 
-        <title> JQuery </title>
+        <title> AJax </title>
 
-        <!-- <script
-src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-        -->
 
         <script type="text/javascript" src="jquery.min.js"></script> 
 
-        <style type="text/css">
-
-            #circle {
-
-                width: 150px;
-                height: 150px;
-                border-radius: 50%;
-                background-color: green;
-                margin: 10px;
-
-
-            }
-       
-        
-        </style>
 
     </head>
 
@@ -33,25 +15,18 @@ src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <body>
 
 
-        <div id="circle"></div>
 
 
 
         <script type="text/javascript">
-                
-            $("#circle").click(function() {
 
-                $(this).animate({
-                    width:"200px",
-                    height:"200px"
-                }, 2000, function() {
+            $.get("info.txt", function(data) {
 
-                    $(this).css("background-color", "red"); 
-                })
-
+                alert(data);
 
 
             })
+                
 
         </script>
 
