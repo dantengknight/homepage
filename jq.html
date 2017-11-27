@@ -17,15 +17,13 @@
 
 
 
-
         <script type="text/javascript">
 
-            $.get("info.txt", function(data) {
+            $.ajax("info.txt").done(function(data) {
 
                 alert(data);
 
-
-            })
+            });
                 
 
         </script>
