@@ -19,9 +19,13 @@
 
         <script type="text/javascript">
 
-            $.ajax("info.txt").done(function(data) {
+            $.ajax("info0.txt").done(function(data) {
 
                 alert(data);
+
+            }).fail(function() {
+
+                alert(" failed")
 
             });
                 
