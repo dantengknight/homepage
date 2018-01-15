@@ -1,0 +1,65 @@
+
+body {
+
+    margin:0;
+    border:0;
+
+}
+
+a	{
+
+    color: black;
+    text-decoration: none;
+
+}
+
+li {
+
+    font-size: 135%;
+
+}
+
+a:hover {
+
+    color: green;
+    text-decoration: none;
+    font-size: 200%;
+
+}
+
+.videolinks {
+
+    background-color:#4285F4;
+    float:left;
+    width:350px;
+    position:relative;
+    opacity:0.8;
+    border-radius: 10px;
+    margin:8px;
+    font-family: 'Architects Daughter', cursive, KaiTi;
+    font-size: 120%;
+
+
+}
+
+.nicecar {
+
+    float:right;
+    margin:8px;
+
+}
+
+.small-games {
+
+    background-color:#F7DC9E;
+    float:left;
+    width:350px;
+    position:relative;
+    opacity:0.8;
+    border-radius: 10px;
+    margin:8px;
+    font-family: 'Architects Daughter', cursive, KaiTi;
+    font-size: 120%;
+
+
+}

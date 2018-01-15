@@ -5,8 +5,10 @@
 
         <title> AJax </title>
 
+	    <link href="jquery-ui/jquery-ui.css" rel="stylesheet">
 
         <script type="text/javascript" src="jquery.min.js"></script> 
+        <script src="jquery-ui/jquery-ui.js"></script>
 
 
     </head>
@@ -14,24 +16,35 @@
 
     <body>
 
+        <div id="draggable"
+             style="width:200px;height:200px;background-color:green;"
+            <p>Drag me around</p>
+        </div>
 
-        <p></p>
+        <div style="width:200px;height:200px;background-color:yellow;"
+            id="droppable">
+
+            <span> haha </span>
+
+        </div>
+
+
 
 
         <script type="text/javascript">
 
-            $.ajax("info.txt")
-                .done(function(data) {
 
-                $("p").html(data);
+            $( "#draggable" ).draggable();
 
-            })
-                .fail(function() {
-
-                alert(" failed")
+            $( "#droppable" ).droppable({
+                drop: function( event, ui) {
+                
+                    $("#droppable")
+                    alert("hello");
+                
+                }
 
             });
-                
 
         </script>
 
