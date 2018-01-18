@@ -16,35 +16,31 @@
 
     <body>
 
-        <div id="draggable"
-             style="width:200px;height:200px;background-color:green;"
-            <p>Drag me around</p>
+
+        <div id="haha">
+            <h2> eee </h2>
+            <p> wo cal liie </p>
+            <h2> aaa </h2>
+            <p> wo cal liie </p>
+            <h2> ppp </h2>
+            <p> wo cal liie </p>
         </div>
 
-        <div style="width:200px;height:200px;background-color:yellow;"
-            id="droppable">
 
-            <span> haha </span>
-
-        </div>
-
-
-
+        <ul id="sortable"> 
+            <li> haha1 </li>
+            <li> haha2 </li>
+            <li> haha3 </li>
+            <li> haha4 </li>
+            <li> haha5 </li>
+            <li> haha6 </li>
+        </ul>
 
         <script type="text/javascript">
 
+            $("#haha").accordion();
+            $("#sortable").sortable();
 
-            $( "#draggable" ).draggable();
-
-            $( "#droppable" ).droppable({
-                drop: function( event, ui) {
-                
-                    $("#droppable")
-                    alert("hello");
-                
-                }
-
-            });
 
         </script>
 
