@@ -10,6 +10,10 @@ ratAddr = ["images/hamtaro0.gif",
     evilRatAddr];
 surpriseRatAddr = "images/surprise.png";
 ratStatus = [false,false,false,false,false];
+Wwidth = $(window).width();
+Wheight = $(window).height();
+ratWidth = $("img").width();
+ratHeight = $("img").height();
 
 
 // start game
@@ -58,9 +62,9 @@ function showRat() {
     // put img into the div
     document.getElementById(ratId).innerHTML =
         "<img src=" + ratAddr[ratNum] +">";
-    // show that rat, set width, height
-    var top = Math.random() * 550;
-    var left = Math.random() * 1250;
+    // show that rat, set width, height, according the viewpoint size
+    var top = Math.random() * (Wheight-ratHeight);
+    var left = Math.random() * (Wwidth-ratWidth);
     document.getElementById(ratId).style.top = top + "px";
     document.getElementById(ratId).style.left = left + "px";
 

@@ -8,7 +8,7 @@ body {
 
 }
 
-img {
+.rats>img {
 
     width:200px;
     height:200px;
@@ -42,5 +42,17 @@ img {
 
 }
 
+
+@media only screen and (max-width: 640px) {
+
+    .rats>img {
+
+        width:80px;
+        height:80px;
+        opacity:0.8;
+
+    }
+
+}
 
 
